@@ -23,14 +23,26 @@ html {
   font-family: "Quick Sand";
   font-style: normal;
   font-weight: 600;
-  src: url("./appData/fonts/Quicksand-VariableFont_wght.ttf");
+  src: url("../appData/fonts/Quicksand-VariableFont_wght.ttf");
 }
 
 body {
-  /* background: url('./appData/1745589.jpg') center/100% 100% no-repeat; */
   background-color: #003232;
   font-family: "Quick Sand";
   margin: 0;
+}
+
+body::-webkit-scrollbar {
+  width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: greenyellow;
+  border-radius: 5px;
 }
 
 .container {
@@ -59,12 +71,24 @@ body {
   align-items: center;
 }
 
-.nav-bar img:last-of-type {
-  width: 2%;
-  height: 2%;
+.nav-bar a {
+  color: white;
+  text-decoration-line: none;
 }
 
-main {
+.nav-bar div {
+  width: 5%;
+  height: 100%;
+  margin-left: 10em;
+  display: inline-flex;
+}
+
+/* .nav-bar img:last-of-type {
+  width: 2%;
+  height: 2%;
+} */
+
+.home {
   width: 100%;
   flex: 15 1 0;
   display: -webkit-flex;
@@ -73,20 +97,20 @@ main {
   align-items: center;
 }
 
-main div:first-of-type {
+.home div:first-of-type {
   width: 40%;
 }
 
-main div:last-of-type {
+.home div:last-of-type {
   width: 25%;
 }
 
-main div:last-of-type img {
+.home div:last-of-type img {
   width: 100%;
   height: 100%;
 }
 
-main div button {
+.home div button {
   font: inherit;
   border-radius: 50px;
   border: none;

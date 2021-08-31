@@ -1,9 +1,9 @@
 import React from "react";
 import main from "../appData/images/main-img.jpg";
 
-const Main = () => {
+const Home = () => {
   return (
-    <main>
+    <main className="home">
       <div>
         <h1>Everything you are looking for in one place</h1>
         <p>
@@ -23,4 +23,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Home;

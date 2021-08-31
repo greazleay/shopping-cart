@@ -1,17 +1,21 @@
 import React from "react";
 import bag from "../appData/images/shopping-cart.png";
 import logo from "../appData/images/h2.png"
+import { Link } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = (props) => {
     return (
         <nav className="nav-bar">
-            <img src={logo} alt=""/>
+            <img src={logo} alt="" />
             <ul>
-                <li>Home</li>
-                <li>Products</li>
-                <li>Support</li>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/shop">Shop</Link></li>
+                <li><Link to="/checkout">Checkout</Link></li>
             </ul>
-            <img src={bag} alt=""/>
+            <div>
+                <img src={bag} alt="" />
+                <span>{props.cart}</span>
+            </div>
         </nav>
     )
 }
