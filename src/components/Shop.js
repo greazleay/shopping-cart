@@ -39,7 +39,7 @@ const Shop = (props) => {
       </Link>
       <p>{item.title}</p>
       <p>${item.price}</p>
-      <button onClick={props.updateCart}>Add to cart</button>
+      <button id={item.id} onClick={() => props.updateCart(item)}>Add to cart</button>
     </div>
   ));
   return (
