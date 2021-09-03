@@ -1,0 +1,25 @@
+.itemDetails {
+    width: 100%;
+    flex: 15 1 0;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row wrap;
+    place-content: center space-around;
+    align-items: flex-start;
+    margin: 5em 0;
+    padding: 0 10em;
+  }
+
+  .item-box {
+    display: flex;
+    justify-content: space-around;
+    /* height: 35%; */
+    width: 60%;
+    font-size: 1.3em;
+  }
+
+  .item-box img {
+    width: 22em;
+    height: 27em;
+    /* aspect-ratio: 100/100; */
+  }

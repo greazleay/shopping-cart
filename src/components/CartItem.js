@@ -10,9 +10,9 @@ const CartItem = (props) => {
             <div>
                 <p>${props.data.price}</p>
                 <div>
-                    <button onClick={() => props.increaseCount(props.data.id)}>+</button>
-                    <span>{props.data.count}</span>
                     <button onClick={() => props.decreaseCount(props.data.id)}>-</button>
+                    <span>{props.data.count}</span>
+                    <button onClick={() => props.increaseCount(props.data.id)}>+</button>
                 </div>
             </div>
         </div>

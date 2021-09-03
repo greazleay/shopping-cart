@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import main from "../appData/images/main-img.jpg";
 
 const Home = () => {
@@ -14,7 +15,7 @@ const Home = () => {
           tincidunt eget nullam non nisi. Cursus mattis molestie a iaculis at
           erat.
         </p>
-        <button>Shop Items</button>
+        <Link to="/shop"><button>Shop Items</button></Link>
       </div>
       <div>
           <img src={main} alt="Main-Page"/>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SideBar from "./Sidebar";
+import "../assets/css/Shop.css";
 
 const Shop = (props) => {
   const [items, setItems] = useState([]);
@@ -39,7 +40,7 @@ const Shop = (props) => {
       </Link>
       <p>{item.title}</p>
       <p>${item.price}</p>
-      <button id={item.id} onClick={() => props.updateCart(item)}>Add to cart</button>
+      <button id={item.id} onClick={() => props.addToCart(item)}>Add to cart</button>
     </div>
   ));
   return (

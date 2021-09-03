@@ -1,5 +1,6 @@
 import React from "react";
 import CartItem from "./CartItem";
+import "../assets/css/Checkout.css"
 
 const Checkout = (props) => {
   const cartItemsList = props.cartItems.map((item) => item.count > 0 ? (
