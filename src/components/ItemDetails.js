@@ -31,20 +31,27 @@ const ItemDetails = ({ match, ...props }) => {
   const content = (
     <>
       <div className="item-box">
-        <img src={item.image} alt="item" />
-        <div>
-          <p key={item.id}>{item.title}</p>
-          <p>${item.price}</p>
-          <div>
+        <div className="item-box-img">
+          <img src={item.image} alt="item" />
+        </div>
+        <div className="item-box-text-area">
+          <div className="item-box-text">
+            <h3 key={item.id}>{item.title}</h3>
+            <p>${item.price}</p>
+          </div>
+          <div className="item-box-quantity">
+            <span>Quantity:</span>
             <button onClick={lowerItemCount}>-</button>
             <span>{item.count}</span>
             <button onClick={raiseItemCount}>+</button>
           </div>
-          <button id={item.id} onClick={() => props.addToCart(item)}>Add to cart</button>
+          <div>
+            <button className="add-to-cart" id={item.id} onClick={() => props.addToCart(item)}>Add to cart</button>
+          </div>
         </div>
       </div>
-      <div>
-        <h3>Description</h3>
+      <div className="item-description">
+        <h2>Description</h2>
         <hr />
         <p>{item.description}</p>
       </div>

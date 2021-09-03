@@ -32,7 +32,7 @@ const Routes = () => {
           }
           return i
         })
-        : [...cartItems, new CartEntry(item.id, item.image, item.title, item.price, item.count === undefined ? 1 : item.count)]),
+        : [...cartItems, new CartEntry(item.id, item.image, item.title, item.price, !item.count ? 1 : item.count)]),
     ];
     setCartItems(updatedCartItems);
   };
