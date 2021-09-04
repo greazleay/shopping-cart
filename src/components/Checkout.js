@@ -4,7 +4,7 @@ import "../assets/css/Checkout.css"
 import { Link } from "react-router-dom";
 
 const Checkout = (props) => {
-  
+
   const handleClick = () => {
     alert("Order Received!!! Thank you for your patronage")
   }
@@ -17,24 +17,30 @@ const Checkout = (props) => {
     />
   ) : null);
 
-  const content = <>
-    <h3 >Your Shopping Cart</h3><hr className="cart-header"/>
-      <div className="order-area">
-      {props.cartItems.length === 0 ? <p>Your Cart is empty</p> : cartItemsList}
-      <div className="order-summary">
-        <h3>Order Summary</h3><hr/>
-        <p>{props.itemsTotal} Items</p>
-        <p>Total Price: ${props.totalPrice}</p>
-        <button onClick={handleClick}>Continue to Checkout</button>
-      </div>  
+  const content = <div className="content">
+    <div className="order-area">
+      <h3 >Your Shopping Cart</h3><hr />
+      <div className="order-table">
+        <div className="item">ITEM</div>
+        <div className="quantity">QUANTITY</div>
+        <div className="unit-price">Unit-Price</div>
+        <div className="sub-total">Sub-Total</div>
+        {cartItemsList}
       </div>
-  </>
+    </div>
+    <div className="order-summary">
+      <h3>Order Summary</h3><hr />
+      <p>Quantity: {props.itemsTotal} Items</p>
+      <p>Total Price: ${props.totalPrice.toFixed(2)}</p>
+      <button onClick={handleClick}>Checkout</button>
+    </div>
+  </div>
 
 
   return (
     <main className="checkout">
       <Link to="/shop">
-        <button>← Continue Shopping</button>
+        <button className="continue">← Continue Shopping</button>
       </Link>
       {props.cartItems.map(i => i.count).every(i => i === 0) ? <p>Your Cart is empty</p> : content}
     </main>
