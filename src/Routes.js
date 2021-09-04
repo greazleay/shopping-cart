@@ -27,7 +27,7 @@ const Routes = () => {
         ? cartItems.map(i => {
           if (i.id === item.id) {
             return {
-              ...i, count: i.count + 1
+              ...i, count: item.count ? i.count + item.count : i.count + 1
             }
           }
           return i
@@ -54,16 +54,16 @@ const Routes = () => {
     });
     setCartItems(updatedCartItems);
   }
+
+  const itemsTotal = cartItems.length === 0
+    ? null
+    : cartItems.map((i) => i.count).reduce((a, b) => a + b)
   
   return (
     <BrowserRouter>
       <div className="container">
         <NavBar
-          cart={
-            cartItems.length === 0
-              ? null
-              : cartItems.map((i) => i.count).reduce((a, b) => a + b)
-          }
+          cart={itemsTotal}
         />
         <Switch>
           <Route exact path="/" component={Home} />
@@ -87,6 +87,7 @@ const Routes = () => {
             render={() => (
               <Checkout
                 cartItems={cartItems}
+                itemsTotal={itemsTotal}
                 totalPrice={cartItems.length === 0 ? 0 : cartItems.map(i => i.count * i.price).reduce((a, b) => a + b)}
                 increaseCount={(e) => increaseCount(e)}
                 decreaseCount={(e) => decreaseCount(e)}

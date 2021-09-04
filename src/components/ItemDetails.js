@@ -1,5 +1,6 @@
 import "../assets/css/ItemDetails.css";
 import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 
 const ItemDetails = ({ match, ...props }) => {
   const [item, setItem] = useState({});
@@ -46,7 +47,9 @@ const ItemDetails = ({ match, ...props }) => {
             <button onClick={raiseItemCount}>+</button>
           </div>
           <div>
-            <button className="add-to-cart" id={item.id} onClick={() => props.addToCart(item)}>Add to cart</button>
+            <Link to="/checkout">
+              <button className="add-to-cart" id={item.id} onClick={() => props.addToCart(item)}>Buy Now</button>
+            </Link>
           </div>
         </div>
       </div>

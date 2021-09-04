@@ -2,13 +2,14 @@ import React from "react";
 
 const CartItem = (props) => {
     return (
-        <div>
+        <div className="cart-item">
             <div>
                 <img src={props.data.source} alt="" />
             </div>
             <p>{props.data.itemName}</p>
             <div>
-                <p>${props.data.price}</p>
+                <p>Unit Price: ${props.data.price}</p>
+                <p>Total Item Price: ${props.data.count * props.data.price}</p>
                 <div>
                     <button onClick={() => props.decreaseCount(props.data.id)}>-</button>
                     <span>{props.data.count}</span>
