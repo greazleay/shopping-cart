@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import main from "../appData/images/main-img.jpg";
+import main from "../assets/images/main-img.jpg";
 
 const Home = () => {
   return (
