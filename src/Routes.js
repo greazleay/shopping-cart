@@ -67,6 +67,7 @@ const Routes = () => {
         />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/shopping-cart" component={Home} />
           <Route
             exact
             path="/shop"
