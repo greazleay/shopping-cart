@@ -1,7 +1,10 @@
-import '../styles/globals.css'
+import '@styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
 import { Layout } from '@components/Layout'
+import { ThemeProvider } from '@mui/material'
+import { theme } from '@theme'
+import CssBaseline from '@mui/material/CssBaseline';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -10,12 +13,19 @@ function MyApp({ Component, pageProps }: AppProps) {
     const WebFont = require('webfontloader')
     WebFont.load({
       google: {
-        families: ['Pacifico', 'Poppins']
+        families: ['Pacifico', 'Poppins', 'Quicksand']
       }
     });
   }, []);
 
-  return <Component {...pageProps} />
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
+  )
 }
 
 export default MyApp
