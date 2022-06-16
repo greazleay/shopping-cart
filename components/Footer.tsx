@@ -1,30 +1,37 @@
-import styles from '@styles/layout.module.css';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { Box, Link, List, ListItem, Paper, Stack } from '@mui/material';
+import LanguageIcon from '@mui/icons-material/Language';
+import { Box, Link, List, ListItem, Typography, Toolbar } from '@mui/material';
 
 export const Footer = () => {
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flex: 1 }}>
-
-            <Box component={'span'}>
-                © {new Date().getFullYear()}, Built with Next.js
+        <Toolbar>
+            <Box component={'div'} sx={{ display: 'flex', justifyContent: 'space-evenly', width: '100%' }}>
+                <Box sx={{ py: 1 }}>
+                    <Typography variant="h6" sx={{ fontFamily: "inherit" }}>
+                        © {new Date().getFullYear()} Pollaroid | Shopping Cart
+                    </Typography>
+                </Box>
+                <List sx={{ display: 'flex' }}>
+                    <ListItem>
+                        <Link href='https://github.com/greazleay' target='_blank' color='inherit'>
+                            <GitHubIcon />
+                        </Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link href='https://www.linkedin.com/in/siezes' target='_blank' color='inherit'>
+                            <LinkedInIcon />
+                        </Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link href='https://pollaroid.net' target='_blank' color='inherit'>
+                            <LanguageIcon />
+                        </Link>
+                    </ListItem>
+                </List>
             </Box>
 
-            <List>
-                <ListItem>
-                    <Link href='https://github.com/greazleay' target='_blank'>
-                        <GitHubIcon />
-                    </Link>
-                </ListItem>
-            </List>
+        </Toolbar>
 
-            <ListItem>
-                <Link href='https://linkedin.com/in/siezes' target='_blank'>
-                    <LinkedInIcon />
-                </Link>
-            </ListItem>
-
-        </Box>
     );
 }

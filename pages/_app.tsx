@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
 import { Layout } from '@components/Layout'
 import { ThemeProvider } from '@mui/material'
-import { theme } from '@theme'
+import { theme } from '@themes/theme'
 import CssBaseline from '@mui/material/CssBaseline';
 
 function MyApp({ Component, pageProps }: AppProps) {

@@ -2,7 +2,6 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import AddShoppingCartSharpIcon from '@mui/icons-material/AddShoppingCartSharp';
 import Badge from '@mui/material/Badge';
@@ -28,7 +27,7 @@ export const NavBar = () => {
 
                     <Box sx={{ paddingTop: 1 }}>
                         <IconButton size="large" edge="start" color="inherit" aria-label="shopping-cart" sx={{ mr: 2 }}>
-                            <Badge badgeContent={4} color='secondary' sx={{ mr: 2 }}>
+                            <Badge badgeContent={1} color='secondary' sx={{ mr: 2 }}>
                                 <AddShoppingCartSharpIcon fontSize='large' />
                             </Badge>
                         </IconButton>
