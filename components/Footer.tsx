@@ -6,12 +6,15 @@ import { Box, Link, List, ListItem, Typography, Toolbar } from '@mui/material';
 export const Footer = () => {
     return (
         <Toolbar>
+            
             <Box component={'div'} sx={{ display: 'flex', justifyContent: 'space-evenly', width: '100%' }}>
+            
                 <Box sx={{ py: 1 }}>
                     <Typography variant="h6" sx={{ fontFamily: "inherit" }}>
                         © {new Date().getFullYear()} Pollaroid | Shopping Cart
                     </Typography>
                 </Box>
+            
                 <List sx={{ display: 'flex' }}>
                     <ListItem>
                         <Link href='https://github.com/greazleay' target='_blank' color='inherit'>
@@ -29,6 +32,7 @@ export const Footer = () => {
                         </Link>
                     </ListItem>
                 </List>
+            
             </Box>
 
         </Toolbar>
