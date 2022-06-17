@@ -26,19 +26,20 @@ export const NavBar = () => {
         <AppBar elevation={1} position='static' color='transparent'>
             <Toolbar>
 
-                <Box component={'div'} sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                <Box component={'div'} sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', flexWrap: 'wrap' }}>
 
                     <Box>
-                        <IconButton size='medium' edge='start' color='inherit' aria-label='logo' sx={{ mr: 2 }}>
-                            <img src='h2.png' alt='logo' />
+                        <IconButton size='medium' edge='start' color='inherit' aria-label='logo'>
+                            <img src='img_nav.png' alt='logo' />
                         </IconButton>
                     </Box>
 
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Typography variant='h6' sx={{ mr: '20px', cursor: 'pointer', fontFamily: 'inherit' }}>Home</Typography>
-                        <Typography variant='h6' sx={{ mr: '20px', cursor: 'pointer', fontFamily: 'inherit' }}>Shop</Typography>
+                        <Typography variant='subtitle1' component="div" sx={{ pr: '20px', cursor: 'pointer', fontFamily: 'inherit', fontWeight: '600' }}>Home</Typography>
+                        <Typography variant='subtitle1' component="div" sx={{ pr: '20px', cursor: 'pointer', fontFamily: 'inherit', fontWeight: '600' }}>Shop</Typography>
                         <Typography
-                            variant='h6' sx={{ mr: '20px', cursor: 'pointer', fontFamily: 'inherit' }}
+                            variant='subtitle1' sx={{ pr: '20px', cursor: 'pointer', fontFamily: 'inherit', fontWeight: '600' }}
+                            component="div"
                             aria-controls={openMenu ? 'basic-menu' : undefined}
                             aria-haspopup='true'
                             aria-expanded={openMenu ? 'true' : undefined}
@@ -52,12 +53,12 @@ export const NavBar = () => {
                             <MenuItem onClick={() => { }}>Jewelery</MenuItem>
                             <MenuItem onClick={() => { }}>Electronics</MenuItem>
                         </Menu>
-                        <Typography variant='h6' sx={{ mr: '20px', cursor: 'pointer', fontFamily: 'inherit' }}>Checkout</Typography>
+                        <Typography variant='subtitle1' component="div" sx={{ pr: '20px', cursor: 'pointer', fontFamily: 'inherit', fontWeight: '600' }}>Checkout</Typography>
                     </Box>
 
-                    <Box sx={{ paddingTop: 1 }}>
-                        <IconButton size='large' edge='start' color='inherit' aria-label='shopping-cart' sx={{ mr: 2 }}>
-                            <Badge badgeContent={1} color='secondary' sx={{ mr: 2 }}>
+                    <Box sx={{ pt: '10px' }}>
+                        <IconButton size='large' edge='start' color='inherit' aria-label='shopping-cart' sx={{ pr: '20px' }}>
+                            <Badge badgeContent={1} color='secondary'>
                                 <AddShoppingCartSharpIcon fontSize='large' />
                             </Badge>
                         </IconButton>
