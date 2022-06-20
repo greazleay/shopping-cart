@@ -1,10 +1,12 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
+import Container from '@mui/material/Container'
+import Head from 'next/head'
+import homeImage from '@public/img_home.jpg';
+import Image from 'next/image';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import Typography from '@mui/material/Typography'
 
 const Home: NextPage = () => {
   return (
@@ -43,7 +45,7 @@ const Home: NextPage = () => {
       </Box>
 
       <Box width={'30%'}>
-        <img src='img_home.jpg' alt='shopping cart' style={{ width: '100%', height: 'auto' }} />
+        <Image src={homeImage} alt='shopping cart' />
       </Box>
 
     </Container>

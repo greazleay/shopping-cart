@@ -4,11 +4,13 @@ import AppBar from '@mui/material/AppBar';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
+import Image from 'next/image';
 import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import navLogo from '@public/img_nav.png';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
@@ -33,7 +35,7 @@ export const NavBar = () => {
 
                     <Box>
                         <IconButton size='medium' edge='start' color='inherit' aria-label='logo'>
-                            <img src='img_nav.png' alt='logo' />
+                            <Image src={navLogo} alt='logo' />
                         </IconButton>
                     </Box>
 
@@ -63,8 +65,8 @@ export const NavBar = () => {
                             </Typography>
 
                             <Menu id='basic-menu' anchorEl={anchorEl} open={openMenu} onClose={handleClose}>
-                                <MenuItem onClick={() => { }}>Men's clothing</MenuItem>
-                                <MenuItem onClick={() => { }}>Women's clothing</MenuItem>
+                                <MenuItem onClick={() => { }}>Men&apos;s clothing</MenuItem>
+                                <MenuItem onClick={() => { }}>Women&apos;s clothing</MenuItem>
                                 <MenuItem onClick={() => { }}>Jewelery</MenuItem>
                                 <MenuItem onClick={() => { }}>Electronics</MenuItem>
                             </Menu>
