@@ -1,9 +1,10 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import styles from '@styles/layout.module.css'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
+import Button from '@mui/material/Button'
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
 const Home: NextPage = () => {
   return (
@@ -17,10 +18,10 @@ const Home: NextPage = () => {
 
       <Box width={'40%'}>
         <Typography variant='h3' sx={{ fontFamily: 'inherit', fontWeight: 'inherit' }} >
-          Everything you are looking for is here.
+          Everything you are looking for in one place.
         </Typography>
 
-        <Typography variant='subtitle2' component={'p'} sx={{ fontFamily: 'inherit', fontWeight: 'inherit' }}>
+        <Typography variant='subtitle2' component={'p'} sx={{ fontFamily: 'inherit', fontWeight: 'inherit', my: '20px' }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam
           volutpat commodo sed egestas egestas fringilla. Faucibus ornare
@@ -28,9 +29,21 @@ const Home: NextPage = () => {
           tincidunt eget nullam non nisi. Cursus mattis molestie a iaculis at
           erat.
         </Typography>
+
+        <Button
+          href='/shop'
+          variant='contained'
+          size='large'
+          sx={{
+            background: 'linear-gradient(90deg, hsl(176, 68%, 64%), hsl(198, 60%, 50%))',
+          }}
+          endIcon={<ShoppingBagIcon />}
+        >
+          Shop Items
+        </Button>
       </Box>
 
-      <Box width={'25%'}>
+      <Box width={'30%'}>
         <img src='img_home.jpg' alt='shopping cart' style={{ width: '100%', height: 'auto' }} />
       </Box>
 
