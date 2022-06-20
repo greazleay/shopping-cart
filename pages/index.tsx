@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography'
 
 const Home: NextPage = () => {
   return (
-    <Container maxWidth='desktop' component={'main'} sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', minHeight: '100vh', flexWrap: 'wrap', width: '100%' }}>
+    <Container maxWidth='xl' component={'main'} sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', minHeight: '100vh', flexWrap: 'wrap', width: '100%' }}>
 
       <Head>
         <title>Shopping Cart | Home</title>
