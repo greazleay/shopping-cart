@@ -6,11 +6,6 @@ body {
   font-weight: 600;
 }
 
-body {
-  background-color: #003232;
-  color: aliceblue;
-}
-
 body::-webkit-scrollbar {
   width: 0.5em;
 }

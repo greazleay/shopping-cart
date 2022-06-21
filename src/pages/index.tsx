@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
-import Head from 'next/head'
 import homeImage from '@public/img_home.jpg';
 import Image from 'next/image';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';

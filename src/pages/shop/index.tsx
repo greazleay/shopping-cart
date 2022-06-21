@@ -7,7 +7,7 @@ import Container from '@mui/material/Container'
 import Pagination from '@mui/material/Pagination'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
-import { useProductContext } from '@contexts/app.context'
+import { useProductContext } from '@src/contexts/app.context'
 import Image from 'next/image'
 import { Loading } from '@components/Loading'
 
@@ -20,8 +20,8 @@ const Shop: NextPage = () => {
             <Grid xs={12} sm={6} md={4} lg={3} item key={product.id}>
                 <Paper elevation={3}>
                     <Image src={product.image} alt={product.title} width={200} height={200} />
-                    <Box px={1} sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                        <Typography variant='subtitle1' component='h2'>
+                    <Box px={1} sx={{ display: 'flex', flexWrap: 'wrap', background: 'inherit' }}>
+                        <Typography variant='subtitle1' component='h2' sx={{ color: 'inherit' }}>
                             {product.title}
                         </Typography>
                     </Box>
@@ -31,7 +31,11 @@ const Shop: NextPage = () => {
     })
 
     return (
-        <Container maxWidth='xl' component={'main'} sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', minHeight: '100vh', flexWrap: 'wrap', width: '100%' }}>
+        <Container
+            maxWidth='xl'
+            component={'main'}
+            sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', minHeight: '100vh', flexWrap: 'wrap', width: '100%' }}
+        >
 
             <Head>
                 <title>Shop Itmes</title>
@@ -41,12 +45,12 @@ const Shop: NextPage = () => {
 
             {loading ? <Loading /> :
 
-                <Box width={'100%'}>
-                    <Grid container spacing={3}>
+                <>
+                    <Grid container spacing={3} sx={{ p: 10 }}>
                         {productsList}
                     </Grid>
                     <Pagination count={4} color='primary' size='large' variant='outlined'></Pagination>
-                </Box>
+                </>
             }
 
 
