@@ -8,8 +8,8 @@ export const useShopState = () => {
     const fetchItems = async () => {
         try {
             setLoading(true);
-            const res = await axios.get('https://fakestoreapi.com/products');
-            setProducts(res.data);
+            const { data } = await axios.get('https://fakestoreapi.com/products');
+            setProducts(data);
         } catch (error) {
             console.error(error);
         } finally {

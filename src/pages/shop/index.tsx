@@ -1,3 +1,4 @@
+import { useState, ChangeEvent } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Box from '@mui/material/Box'
@@ -14,14 +15,24 @@ import { Loading } from '@components/Loading'
 const Shop: NextPage = () => {
 
     const { products, loading } = useProductContext();
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const productsList = products.map(product => {
+    const itemsPerPage = 4;
+    const offset = (currentPage - 1) * itemsPerPage;
+    const pageCount = Math.ceil(products.length / itemsPerPage);
+
+    const handleChange = (e: ChangeEvent<unknown>) => {
+        const { textContent } = e.target as HTMLInputElement;
+        setCurrentPage(Number(textContent));
+    };
+
+    const productsList = products.slice(offset, offset + itemsPerPage).map(product => {
         return (
             <Grid xs={12} sm={6} md={4} lg={3} item key={product.id}>
-                <Paper elevation={3}>
+                <Paper elevation={3} >
                     <Image src={product.image} alt={product.title} width={200} height={200} />
-                    <Box px={1} sx={{ display: 'flex', flexWrap: 'wrap', background: 'inherit' }}>
-                        <Typography variant='subtitle1' component='h2' sx={{ color: 'inherit' }}>
+                    <Box px={1} >
+                        <Typography variant='subtitle1' component='h2' sx={{ fontFamily: 'inherit', fontWeight: '600' }}>
                             {product.title}
                         </Typography>
                     </Box>
@@ -49,7 +60,7 @@ const Shop: NextPage = () => {
                     <Grid container spacing={3} sx={{ p: 10 }}>
                         {productsList}
                     </Grid>
-                    <Pagination count={4} color='primary' size='large' variant='outlined'></Pagination>
+                    <Pagination count={pageCount} page={currentPage} onChange={handleChange} size='large' color='primary' />
                 </>
             }
 
