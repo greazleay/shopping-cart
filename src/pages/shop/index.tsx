@@ -21,9 +21,8 @@ const Shop: NextPage = () => {
     const offset = (currentPage - 1) * itemsPerPage;
     const pageCount = Math.ceil(products.length / itemsPerPage);
 
-    const handleChange = (e: ChangeEvent<unknown>) => {
-        const { textContent } = e.target as HTMLInputElement;
-        setCurrentPage(Number(textContent));
+    const handleChange = (e: ChangeEvent<unknown>, page: number) => {
+        setCurrentPage(page);
     };
 
     const productsList = products.slice(offset, offset + itemsPerPage).map(product => {
@@ -55,12 +54,11 @@ const Shop: NextPage = () => {
             </Head>
 
             {loading ? <Loading /> :
-
                 <>
                     <Grid container spacing={3} sx={{ p: 10 }}>
                         {productsList}
                     </Grid>
-                    <Pagination count={pageCount} page={currentPage} onChange={handleChange} size='large' color='primary' />
+                    <Pagination count={pageCount} page={currentPage} onChange={(e, page) => handleChange(e, page)} size='large' color='primary' />
                 </>
             }
 
