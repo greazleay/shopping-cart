@@ -31,9 +31,8 @@ export const useShopState = () => {
 
     const handleFilter = (e: ChangeEvent<HTMLAnchorElement>) => {
         const { textContent } = e.target;
-        // location.pathname = location.pathname !== '/shop' ? '/shop' : location.pathname
         setFilter(textContent as string);
-        // setAnchorEl(null);
+        setAnchorEl(null);
     }
 
     const fetchItems = async () => {

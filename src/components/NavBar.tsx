@@ -1,3 +1,5 @@
+import { useProductContext } from '@contexts/app.context';
+import { useRouter } from 'next/router';
 import AddShoppingCartSharpIcon from '@mui/icons-material/AddShoppingCartSharp';
 import AppBar from '@mui/material/AppBar';
 import Badge from '@mui/material/Badge';
@@ -12,11 +14,11 @@ import MenuItem from '@mui/material/MenuItem';
 import navLogo from '@public/img_nav.png';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useProductContext } from '@contexts/app.context';
 
 export const NavBar = () => {
 
     const { handleFilter, handleClose, handleMouseOver, anchorEl, openMenu } = useProductContext();
+    const { asPath } = useRouter()
 
     return (
         <AppBar elevation={1} position='static' color='transparent'>
@@ -43,25 +45,32 @@ export const NavBar = () => {
                             </Link>
                         </ListItem>
 
-                        <ListItem>
-                            <Typography
-                                variant='subtitle1' sx={{ cursor: 'pointer', fontFamily: 'inherit', fontWeight: '600' }}
-                                component="div"
-                                aria-controls={openMenu ? 'basic-menu' : undefined}
-                                aria-haspopup='true'
-                                aria-expanded={openMenu ? 'true' : undefined}
-                                onMouseOver={handleMouseOver}
-                            >
-                                Categories
-                            </Typography>
+                        {asPath === '/shop' &&
+                            <ListItem>
+                                <Typography
+                                    variant='subtitle1' sx={{ cursor: 'pointer', fontFamily: 'inherit', fontWeight: '600' }}
+                                    component="div"
+                                    aria-controls={openMenu ? 'basic-menu' : undefined}
+                                    aria-haspopup='true'
+                                    aria-expanded={openMenu ? 'true' : undefined}
+                                    onMouseOver={handleMouseOver}
+                                >
+                                    Categories
+                                </Typography>
 
-                            <Menu id='basic-menu' anchorEl={anchorEl} open={openMenu} onClose={handleClose}>
-                                <MenuItem onClick={(e) => handleFilter(e)}>Men&apos;s clothing</MenuItem>
-                                <MenuItem onClick={(e) => handleFilter(e)}>Women&apos;s clothing</MenuItem>
-                                <MenuItem onClick={(e) => handleFilter(e)}>Jewelery</MenuItem>
-                                <MenuItem onClick={(e) => handleFilter(e)}>Electronics</MenuItem>
-                            </Menu>
-                        </ListItem>
+                                <Menu id='basic-menu' anchorEl={anchorEl} open={openMenu} onClose={handleClose}>
+                                    {['All Items', 'Men\'s clothing', 'Women\'s clothing', 'Jewelery', 'Electronics'].map((item, index) => {
+                                        return <MenuItem
+                                            key={index}
+                                            onClick={(e) => handleFilter(e)}
+                                            sx={{ fontFamily: 'inherit', fontWeight: '600' }}
+                                        >
+                                            {item}
+                                        </MenuItem>
+                                    })}
+                                </Menu>
+                            </ListItem>
+                        }
 
                         <ListItem>
                             <Link href='/checkout' color='inherit' underline='none'>
