@@ -1,4 +1,3 @@
-import { useState, MouseEvent } from 'react';
 import AddShoppingCartSharpIcon from '@mui/icons-material/AddShoppingCartSharp';
 import AppBar from '@mui/material/AppBar';
 import Badge from '@mui/material/Badge';
@@ -13,19 +12,11 @@ import MenuItem from '@mui/material/MenuItem';
 import navLogo from '@public/img_nav.png';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { useProductContext } from '@contexts/app.context';
 
 export const NavBar = () => {
 
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const openMenu = Boolean(anchorEl);
-
-    const handleMouseOver = (event: MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    }
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    }
+    const { handleFilter, handleClose, handleMouseOver, anchorEl, openMenu } = useProductContext();
 
     return (
         <AppBar elevation={1} position='static' color='transparent'>
@@ -65,10 +56,10 @@ export const NavBar = () => {
                             </Typography>
 
                             <Menu id='basic-menu' anchorEl={anchorEl} open={openMenu} onClose={handleClose}>
-                                <MenuItem onClick={() => { }}>Men&apos;s clothing</MenuItem>
-                                <MenuItem onClick={() => { }}>Women&apos;s clothing</MenuItem>
-                                <MenuItem onClick={() => { }}>Jewelery</MenuItem>
-                                <MenuItem onClick={() => { }}>Electronics</MenuItem>
+                                <MenuItem onClick={(e) => handleFilter(e)}>Men&apos;s clothing</MenuItem>
+                                <MenuItem onClick={(e) => handleFilter(e)}>Women&apos;s clothing</MenuItem>
+                                <MenuItem onClick={(e) => handleFilter(e)}>Jewelery</MenuItem>
+                                <MenuItem onClick={(e) => handleFilter(e)}>Electronics</MenuItem>
                             </Menu>
                         </ListItem>
 

@@ -27,6 +27,12 @@ declare module '@mui/material/styles' {
     }
 }
 
+declare module '@mui/material/Pagination' {
+    interface PaginationPropsColorOverrides {
+      neutral: true;
+    }
+  }
+
 
 export const theme = createTheme({
     status: {
@@ -62,6 +68,13 @@ export const theme = createTheme({
                     }
                 }
             ]
+        },
+        MuiPaginationItem: {
+            styleOverrides: {
+                root: {
+                    color: 'white'
+                }
+            }
         }
     },
     breakpoints: {

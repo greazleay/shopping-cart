@@ -1,6 +1,6 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, MouseEvent } from 'react';
 
-interface IProduct {
+export interface IProduct {
     id: number;
     category: string;
     description: string;
@@ -14,13 +14,17 @@ interface IProduct {
 }
 
 export interface IProductContext {
-    products: IProduct[];
+    filteredProducts: IProduct[];
     loading: boolean;
     filter: string;
     itemsPerPage: number;
     offset: number;
     pageCount: number;
     currentPage: number;
+    openMenu: boolean;
+    anchorEl: null | HTMLElement;
+    handleClose: () => void;
+    handleMouseOver: () => void;
     handlePaginate: (e: ChangeEvent<unknown>, page: number) => void
-    handleFilter: (e: ChangeEvent<HTMLLIElement>) => void
+    handleFilter: (e: MouseEvent<HTMLLIElement | HTMLDivElement>) => void
 }

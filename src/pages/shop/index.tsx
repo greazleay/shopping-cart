@@ -8,15 +8,17 @@ import Container from '@mui/material/Container'
 import Pagination from '@mui/material/Pagination'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
-import { useProductContext } from '@src/contexts/app.context'
+import { useProductContext } from '@contexts/app.context'
 import Image from 'next/image'
 import { Loading } from '@components/Loading'
+import { Sidebar } from '@components/Sidebar'
+import { theme } from '@src/themes/theme'
 
 const Shop: NextPage = () => {
 
-    const { products, loading, filter, itemsPerPage, offset, pageCount, currentPage, handlePaginate } = useProductContext();
+    const { filteredProducts, loading, itemsPerPage, offset, pageCount, currentPage, handlePaginate } = useProductContext();
 
-    const productsList = products.slice(offset, offset + itemsPerPage).map(product => {
+    const productsList = filteredProducts.slice(offset, offset + itemsPerPage).map(product => {
         return (
             <Grid xs={12} sm={6} md={4} lg={3} item key={product.id}>
                 <Paper elevation={3} >
@@ -35,7 +37,7 @@ const Shop: NextPage = () => {
         <Container
             maxWidth='xl'
             component={'main'}
-            sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', minHeight: '100vh', flexWrap: 'wrap', width: '100%' }}
+            sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center  ', minHeight: '100vh', flexWrap: 'wrap', width: '100%' }}
         >
 
             <Head>
@@ -46,10 +48,23 @@ const Shop: NextPage = () => {
 
             {loading ? <Loading /> :
                 <>
-                    <Grid container spacing={3} sx={{ p: 10 }}>
-                        {productsList}
-                    </Grid>
-                    <Pagination count={pageCount} page={currentPage} onChange={(e, page) => handlePaginate(e, page)} size='large' color='secondary' />
+                    <Box width={'20%'}>
+                        <Sidebar />
+                    </Box>
+
+                    <Box width={'70%'} sx={{ display: 'flex', flexFlow: 'column wrap', justifyContent: 'space-around', alignItems: 'center' }}>
+                        <Grid container spacing={3} sx={{ p: 10 }}>
+                            {productsList}
+                        </Grid>
+                        <Pagination
+                            color='secondary'
+                            count={pageCount}
+                            page={currentPage}
+                            size='large'
+                            onChange={(e, page) => handlePaginate(e, page)}
+                            sx={{ color: 'white' }}
+                        />
+                    </Box>
                 </>
             }
 
