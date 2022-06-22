@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 interface IProduct {
     id: number;
     category: string;
@@ -14,4 +16,11 @@ interface IProduct {
 export interface IProductContext {
     products: IProduct[];
     loading: boolean;
+    filter: string;
+    itemsPerPage: number;
+    offset: number;
+    pageCount: number;
+    currentPage: number;
+    handlePaginate: (e: ChangeEvent<unknown>, page: number) => void
+    handleFilter: (e: ChangeEvent<HTMLLIElement>) => void
 }

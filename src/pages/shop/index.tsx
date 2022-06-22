@@ -14,16 +14,7 @@ import { Loading } from '@components/Loading'
 
 const Shop: NextPage = () => {
 
-    const { products, loading } = useProductContext();
-    const [currentPage, setCurrentPage] = useState(1);
-
-    const itemsPerPage = 4;
-    const offset = (currentPage - 1) * itemsPerPage;
-    const pageCount = Math.ceil(products.length / itemsPerPage);
-
-    const handleChange = (e: ChangeEvent<unknown>, page: number) => {
-        setCurrentPage(page);
-    };
+    const { products, loading, filter, itemsPerPage, offset, pageCount, currentPage, handlePaginate } = useProductContext();
 
     const productsList = products.slice(offset, offset + itemsPerPage).map(product => {
         return (
@@ -58,11 +49,9 @@ const Shop: NextPage = () => {
                     <Grid container spacing={3} sx={{ p: 10 }}>
                         {productsList}
                     </Grid>
-                    <Pagination count={pageCount} page={currentPage} onChange={(e, page) => handleChange(e, page)} size='large' color='primary' />
+                    <Pagination count={pageCount} page={currentPage} onChange={(e, page) => handlePaginate(e, page)} size='large' color='secondary' />
                 </>
             }
-
-
 
         </Container>
     )

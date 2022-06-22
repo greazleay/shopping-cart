@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext } from 'react';
-import { useShopState } from '@hooks/products';
-import { IProductContext } from '@interfaces/product.context';
+import { useShopState } from '@src/hooks/products.state';
+import { IProductContext } from '@interfaces/productContext.interface';
 
 const ProductContext = createContext<IProductContext>(null!);
 
