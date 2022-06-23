@@ -37,6 +37,8 @@ const Home: NextPage = () => {
           variant='contained'
           sx={{
             background: 'linear-gradient(90deg, hsl(176, 68%, 64%), hsl(198, 60%, 50%))',
+            fontFamily: 'inherit',
+            fontWeight: '600'
           }}
           endIcon={<ShoppingBagIcon />}
         >

@@ -10,9 +10,9 @@ import Typography from '@mui/material/Typography'
 
 export const Footer = () => {
     return (
-        <Box component={'footer'} sx={{ display: 'flex', justifyContent: 'space-evenly', width: '100%', px: '10%' }}>
+        <Box component={'footer'} sx={{ display: 'flex', justifyContent: 'space-evenly', width: '100%', px: 3, py: 2 }}>
 
-            <Box sx={{ py: 1 }}>
+            <Box sx={{ py: 2 }}>
                 <Typography variant='subtitle2' component={'span'} sx={{ fontFamily: 'inherit' }}>
                     © {new Date().getFullYear()} Pollaroid | Shopping Cart
                 </Typography>

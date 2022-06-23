@@ -75,6 +75,13 @@ export const theme = createTheme({
                     color: 'white'
                 }
             }
+        },
+        MuiRating: {
+            styleOverrides: {
+                icon: {
+                    color: 'yellow'
+                }
+            }
         }
     },
     breakpoints: {
