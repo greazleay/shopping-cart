@@ -14,9 +14,9 @@ export interface IProduct {
 }
 
 export interface IProductContext {
+    products: IProduct[];
     filteredProducts: IProduct[];
     loading: boolean;
-    filter: string;
     itemsPerPage: number;
     offset: number;
     pageCount: number;

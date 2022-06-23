@@ -3,13 +3,28 @@ import { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { IProduct } from '@interfaces/productContext.interface';
 
 export const useShopState = () => {
-
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const openMenu = Boolean(anchorEl);
+    
     const [products, setProducts] = useState<IProduct[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [filter, setFilter] = useState('All Items')
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const openMenu = Boolean(anchorEl);
+
+    const fetchItems = async () => {
+        try {
+            const { data } = await axios.get('https://fakestoreapi.com/products');
+            setProducts(data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchItems();
+    }, []);
 
     const filteredProducts = filter === 'All Items' ? products : products.filter(product => product.category.substring(1) === filter.substring(1))
 
@@ -35,22 +50,6 @@ export const useShopState = () => {
         setAnchorEl(null);
     }
 
-    const fetchItems = async () => {
-        try {
-            setLoading(true);
-            const { data } = await axios.get('https://fakestoreapi.com/products');
-            setProducts(data);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    useEffect(() => {
-        fetchItems();
-    }, []);
-
-    return { filteredProducts, loading, filter, itemsPerPage, offset, pageCount, currentPage, handleClose, handleMouseOver, handlePaginate, handleFilter, anchorEl, openMenu };
+    return { products, filteredProducts, loading, itemsPerPage, offset, pageCount, currentPage, anchorEl, openMenu, handleClose, handleMouseOver, handlePaginate, handleFilter };
 }
 
