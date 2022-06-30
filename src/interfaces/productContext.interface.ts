@@ -31,6 +31,7 @@ export interface IProductContext {
     anchorEl: null | HTMLElement;
     handleClose: () => void;
     handleMouseOver: () => void;
-    handlePaginate: (e: ChangeEvent<unknown>, page: number) => void
-    handleFilter: (e: MouseEvent<HTMLLIElement | HTMLDivElement>) => void
+    handlePaginate: (e: ChangeEvent<unknown>, page: number) => void;
+    handleFilter: (e: MouseEvent<HTMLLIElement | HTMLDivElement>) => void;
+    addItemToCart: (product: IProduct) => void
 }

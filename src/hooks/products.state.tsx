@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { IProduct, ICartItem } from '@interfaces/productContext.interface';
+import { listItemClasses } from '@mui/material';
 
 export const useShopState = () => {
-    
+
     const [products, setProducts] = useState<IProduct[]>([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
@@ -52,6 +53,17 @@ export const useShopState = () => {
         setAnchorEl(null);
     }
 
-    return { products, filteredProducts, loading, itemsPerPage, offset, pageCount, currentPage, anchorEl, openMenu, handleClose, handleMouseOver, handlePaginate, handleFilter, cartItems };
-}
+    const addItemToCart = (product: IProduct) => {
 
+        const updatedCartItems = cartItems.some(item => item.product.id === product.id)
+            ? cartItems.map(item => {
+                return item.product.id === product.id
+                    ? { ...item, count: item.count + 1 }
+                    : item
+            })
+            : [...cartItems, { product, count: 1 }]
+        setCartItems(updatedCartItems);
+    };
+
+    return { products, filteredProducts, loading, itemsPerPage, offset, pageCount, currentPage, anchorEl, openMenu, handleClose, handleMouseOver, handlePaginate, handleFilter, cartItems, addItemToCart };
+}

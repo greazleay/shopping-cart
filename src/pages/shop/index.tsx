@@ -17,10 +17,11 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState, Fragment, SyntheticEvent } from 'react'
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 const Shop: NextPage = () => {
 
-    const { filteredProducts, loading, itemsPerPage, offset, pageCount, currentPage, handlePaginate } = useProductContext();
+    const { filteredProducts, loading, itemsPerPage, offset, pageCount, currentPage, handlePaginate, addItemToCart } = useProductContext();
     const [openSnackBar, setOpenSnackbar] = useState(false);
 
     const handleClick = () => {
@@ -28,25 +29,22 @@ const Shop: NextPage = () => {
     };
 
     const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
+        if (reason === 'clickaway') return;
         setOpenSnackbar(false);
     };
 
     const action = (
         <Fragment>
-            <Button color="secondary" size="small" onClick={handleClose}>
+            <Button color='secondary' size='small' onClick={handleClose}>
                 UNDO
             </Button>
             <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
+                size='small'
+                aria-label='close'
+                color='inherit'
                 onClick={handleClose}
             >
-                <CloseIcon fontSize="small" />
+                <CloseIcon fontSize='small' />
             </IconButton>
         </Fragment>
     );
@@ -103,12 +101,13 @@ const Shop: NextPage = () => {
                     <Button
                         // href={`/shop/${product.id}`}
                         variant='contained'
-                        onClick={handleClick}
+                        onClick={() => { handleClick(); addItemToCart(product) }}
                         sx={{
                             background: 'linear-gradient(90deg, hsl(176, 68%, 64%), hsl(198, 60%, 50%))',
                             fontFamily: 'inherit',
                             fontWeight: '600'
                         }}
+                        endIcon={<ShoppingCartOutlinedIcon />}
                     >
                         Add To Cart
                     </Button>
@@ -120,7 +119,7 @@ const Shop: NextPage = () => {
                         action={action}
                     />
                 </Paper>
-            </Grid>
+            </Grid >
         )
     })
 
@@ -140,8 +139,8 @@ const Shop: NextPage = () => {
 
             <Head>
                 <title>Shopping Cart | Products</title>
-                <meta name="description" content="shop items" />
-                <link rel="icon" href="/favicon.ico" />
+                <meta name='description' content='shop items' />
+                <link rel='icon' href='/favicon.ico' />
             </Head>
 
             {loading && <Loading />}
