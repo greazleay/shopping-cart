@@ -13,9 +13,43 @@ import { useProductContext } from '@contexts/app.context'
 import { Loading } from '@components/Loading'
 import { Sidebar } from '@components/Sidebar'
 
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import { useState, Fragment, SyntheticEvent } from 'react'
+
 const Shop: NextPage = () => {
 
     const { filteredProducts, loading, itemsPerPage, offset, pageCount, currentPage, handlePaginate } = useProductContext();
+    const [openSnackBar, setOpenSnackbar] = useState(false);
+
+    const handleClick = () => {
+        setOpenSnackbar(true);
+    };
+
+    const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSnackbar(false);
+    };
+
+    const action = (
+        <Fragment>
+            <Button color="secondary" size="small" onClick={handleClose}>
+                UNDO
+            </Button>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+            >
+                <CloseIcon fontSize="small" />
+            </IconButton>
+        </Fragment>
+    );
 
     const productsList = filteredProducts.slice(offset, offset + itemsPerPage).map(product => {
         return (
@@ -33,16 +67,22 @@ const Shop: NextPage = () => {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         height: '100%',
-                        width: '100%'
+                        width: '100%',
+                        ':hover': {
+                            boxShadow: `-4px 4px 4px 0px #e0efd2, 
+                            -4px -3px 4px 0px #e0efd2,
+                            3px 4px 4px 0px #96979b,
+                            3px -4px 4px 0px #8babf4 `
+                        }
                     }}
                 >
-                    <Box sx={{ width: '100%' }}>
+                    <Box sx={{ width: '100%', cursor: 'pointer' }} component={'a'} href={`/shop/${product.id}`}>
                         <Image src={product.image} alt={product.title} width={300} height={300} />
                     </Box>
 
                     <Box px={1} sx={{}} >
                         <Box>
-                            <Typography variant='subtitle1' sx={{ fontFamily: 'inherit', fontWeight: '600' }}>
+                            <Typography variant='subtitle1' sx={{ fontWeight: '600' }}>
                                 {product.title}
                             </Typography>
 
@@ -61,16 +101,24 @@ const Shop: NextPage = () => {
                         </Box>
                     </Box>
                     <Button
-                        href={`/shop/${product.id}`}
+                        // href={`/shop/${product.id}`}
                         variant='contained'
+                        onClick={handleClick}
                         sx={{
                             background: 'linear-gradient(90deg, hsl(176, 68%, 64%), hsl(198, 60%, 50%))',
                             fontFamily: 'inherit',
                             fontWeight: '600'
                         }}
                     >
-                        View Product
+                        Add To Cart
                     </Button>
+                    <Snackbar
+                        open={openSnackBar}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                        message='Product Added To Cart'
+                        action={action}
+                    />
                 </Paper>
             </Grid>
         )
@@ -96,9 +144,10 @@ const Shop: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            {loading ? <Loading /> :
-                <>
+            {loading && <Loading />}
 
+            {filteredProducts.length !== 0 &&
+                <>
                     <Sidebar />
 
                     <Box width={'70%'} sx={{ display: 'flex', flexFlow: 'column wrap', justifyContent: 'space-around', alignItems: 'center' }}>

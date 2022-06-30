@@ -17,8 +17,9 @@ import Typography from '@mui/material/Typography';
 
 export const NavBar = () => {
 
-    const { handleFilter, handleClose, handleMouseOver, anchorEl, openMenu } = useProductContext();
-    const { asPath } = useRouter()
+    const { handleFilter, handleClose, handleMouseOver, anchorEl, openMenu, cartItems } = useProductContext();
+    const { asPath } = useRouter();
+    const cartItemsCount: number = cartItems.reduce((a, b) => a + b.count, 0)
 
     return (
         <AppBar elevation={1} position='static' color='transparent'>
@@ -81,7 +82,7 @@ export const NavBar = () => {
 
                     <Box sx={{ pt: '10px' }}>
                         <IconButton size='large' edge='start' color='inherit' aria-label='shopping-cart' sx={{ pr: '20px' }}>
-                            <Badge badgeContent={1} color='secondary'>
+                            <Badge badgeContent={cartItemsCount} color='secondary'>
                                 <AddShoppingCartSharpIcon fontSize='large' />
                             </Badge>
                         </IconButton>

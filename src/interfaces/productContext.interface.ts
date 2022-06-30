@@ -13,9 +13,15 @@ export interface IProduct {
     title: string;
 }
 
+export interface ICartItem {
+    product: IProduct;
+    count: number
+}
+
 export interface IProductContext {
     products: IProduct[];
     filteredProducts: IProduct[];
+    cartItems: ICartItem[];
     loading: boolean;
     itemsPerPage: number;
     offset: number;

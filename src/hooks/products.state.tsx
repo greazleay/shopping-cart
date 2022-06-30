@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
-import { IProduct } from '@interfaces/productContext.interface';
+import { IProduct, ICartItem } from '@interfaces/productContext.interface';
 
 export const useShopState = () => {
     
@@ -10,6 +10,8 @@ export const useShopState = () => {
     const [filter, setFilter] = useState('All Items')
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const openMenu = Boolean(anchorEl);
+
+    const [cartItems, setCartItems] = useState<ICartItem[]>([])
 
     const fetchItems = async () => {
         try {
@@ -50,6 +52,6 @@ export const useShopState = () => {
         setAnchorEl(null);
     }
 
-    return { products, filteredProducts, loading, itemsPerPage, offset, pageCount, currentPage, anchorEl, openMenu, handleClose, handleMouseOver, handlePaginate, handleFilter };
+    return { products, filteredProducts, loading, itemsPerPage, offset, pageCount, currentPage, anchorEl, openMenu, handleClose, handleMouseOver, handlePaginate, handleFilter, cartItems };
 }
 

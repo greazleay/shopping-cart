@@ -67,7 +67,12 @@ export const theme = createTheme({
                         fontSize: 10
                     }
                 }
-            ]
+            ],
+            styleOverrides: {
+                root: {
+                    fontFamily: 'Quicksand'
+                }
+            }
         },
         MuiPaginationItem: {
             styleOverrides: {
@@ -80,6 +85,21 @@ export const theme = createTheme({
             styleOverrides: {
                 icon: {
                     color: 'yellow'
+                }
+            }
+        },
+        MuiDivider: {
+            styleOverrides: {
+                root: {
+                    borderColor: 'white'
+                }
+            }
+        },
+        MuiSnackbarContent: {
+            styleOverrides: {
+                root: {
+                    fontFamily: 'Quicksand',
+                    fontWeight: 'bold'
                 }
             }
         }
