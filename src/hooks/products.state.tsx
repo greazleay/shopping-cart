@@ -65,5 +65,43 @@ export const useShopState = () => {
         setCartItems(updatedCartItems);
     };
 
-    return { products, filteredProducts, loading, itemsPerPage, offset, pageCount, currentPage, anchorEl, openMenu, handleClose, handleMouseOver, handlePaginate, handleFilter, cartItems, addItemToCart };
+    const increaseItemCount = (id: number) => {
+        const updatedCartItems = cartItems.map(item => {
+            return {
+                ...item, count: item.product.id === id ? item['count'] + 1 : item['count']
+            }
+        });
+        setCartItems(updatedCartItems);
+    }
+
+    const decreaseItemCount = (id: number) => {
+        const updatedCartItems = cartItems
+            .filter(item => item.count !== 0)
+            .map(item => {
+                return {
+                    ...item, count: item.product.id === id ? item['count'] - 1 : item['count']
+                }
+            });
+        setCartItems(updatedCartItems);
+    }
+
+    return {
+        products,
+        filteredProducts,
+        loading,
+        itemsPerPage,
+        offset,
+        pageCount,
+        currentPage,
+        anchorEl,
+        openMenu,
+        cartItems,
+        handleClose,
+        handleMouseOver,
+        handlePaginate,
+        handleFilter,
+        addItemToCart,
+        increaseItemCount,
+        decreaseItemCount
+    };
 }

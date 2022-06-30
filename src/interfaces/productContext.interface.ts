@@ -34,4 +34,6 @@ export interface IProductContext {
     handlePaginate: (e: ChangeEvent<unknown>, page: number) => void;
     handleFilter: (e: MouseEvent<HTMLLIElement | HTMLDivElement>) => void;
     addItemToCart: (product: IProduct) => void
+    increaseItemCount: (id: number) => void
+    decreaseItemCount: (id: number) => void
 }

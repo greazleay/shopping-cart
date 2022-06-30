@@ -1,7 +1,6 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import Error from 'next/error';
 import Image from 'next/image';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -44,7 +43,9 @@ const ProductDetail = ({ product }: { product: IProduct }) => {
 
     // const router = useRouter();
     // const { productId } = router.query
-    // const { products, loading } = useProductContext();
+    const { increaseItemCount, decreaseItemCount, cartItems } = useProductContext();
+
+    const itemCount = cartItems.some(item => item.product.id === product.id) ? cartItems.find(item => item.product.id === product.id)?.count : 0
     // const product = products.find(({ }, index) => String(index + 1) === productId as string)
 
     // if (loading) return <Loading />
@@ -82,7 +83,7 @@ const ProductDetail = ({ product }: { product: IProduct }) => {
                         <Button>
                             <AddCircleIcon />
                         </Button>
-                        <Button>0</Button>
+                        <Button>{itemCount}</Button>
                         <Button>
                             <RemoveCircleIcon />
                         </Button>

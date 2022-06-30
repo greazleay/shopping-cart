@@ -8,7 +8,12 @@ import Image from 'next/image';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import Typography from '@mui/material/Typography'
 
+import { useRouter } from 'next/router'
+
 const Home: NextPage = () => {
+
+  const { push } = useRouter()
+
   return (
     <Container maxWidth='xl' component={'main'} sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', minHeight: '100vh', flexWrap: 'wrap', width: '100%' }}>
 
@@ -33,7 +38,7 @@ const Home: NextPage = () => {
         </Typography>
 
         <Button
-          href='/shop'
+          onClick={() => push('/shop')}
           variant='contained'
           sx={{
             background: 'linear-gradient(90deg, hsl(176, 68%, 64%), hsl(198, 60%, 50%))',

@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/image'
 import Box from '@mui/material/Box'
@@ -19,7 +20,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useState, Fragment, SyntheticEvent } from 'react'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
+
 const Shop: NextPage = () => {
+
+    const { push } = useRouter()
 
     const { filteredProducts, loading, itemsPerPage, offset, pageCount, currentPage, handlePaginate, addItemToCart } = useProductContext();
     const [openSnackBar, setOpenSnackbar] = useState(false);
@@ -74,7 +78,7 @@ const Shop: NextPage = () => {
                         }
                     }}
                 >
-                    <Box sx={{ width: '100%', cursor: 'pointer' }} component={'a'} href={`/shop/${product.id}`}>
+                    <Box sx={{ width: '100%', cursor: 'pointer' }} onClick={() => push(`/shop/${product.id}`)} >
                         <Image src={product.image} alt={product.title} width={300} height={300} />
                     </Box>
 
@@ -99,7 +103,6 @@ const Shop: NextPage = () => {
                         </Box>
                     </Box>
                     <Button
-                        // href={`/shop/${product.id}`}
                         variant='contained'
                         onClick={() => { handleClick(); addItemToCart(product) }}
                         sx={{

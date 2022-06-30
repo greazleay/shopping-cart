@@ -1,5 +1,5 @@
-import { useProductContext } from '@contexts/app.context';
 import { useRouter } from 'next/router';
+import { useProductContext } from '@contexts/app.context';
 import AddShoppingCartSharpIcon from '@mui/icons-material/AddShoppingCartSharp';
 import AppBar from '@mui/material/AppBar';
 import Badge from '@mui/material/Badge';
@@ -18,7 +18,7 @@ import Typography from '@mui/material/Typography';
 export const NavBar = () => {
 
     const { handleFilter, handleClose, handleMouseOver, anchorEl, openMenu, cartItems } = useProductContext();
-    const { asPath } = useRouter();
+    const { asPath, push } = useRouter();
     const cartItemsCount: number = cartItems.reduce((a, b) => a + b.count, 0)
 
     return (
@@ -35,13 +35,13 @@ export const NavBar = () => {
 
                     <List component={'nav'} sx={{ display: 'flex', alignItems: 'center' }}>
                         <ListItem>
-                            <Link href='/' color='inherit' underline='none'>
+                            <Link color='inherit' underline='none' component={'span'} onClick={() => push('/')} sx={{ cursor: 'pointer' }} >
                                 Home
                             </Link>
                         </ListItem>
 
                         <ListItem>
-                            <Link href='/shop' color='inherit' underline='none'>
+                            <Link color='inherit' underline='none' component={'span'} onClick={() => push('/shop')} sx={{ cursor: 'pointer' }}>
                                 Shop
                             </Link>
                         </ListItem>
@@ -74,7 +74,7 @@ export const NavBar = () => {
                         }
 
                         <ListItem>
-                            <Link href='/checkout' color='inherit' underline='none'>
+                            <Link color='inherit' underline='none' component={'span'} onClick={() => push('/checkout')} sx={{ cursor: 'pointer' }}>
                                 Checkout
                             </Link>
                         </ListItem>
