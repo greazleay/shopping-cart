@@ -7,6 +7,7 @@ export const useShopState = () => {
 
     const [products, setProducts] = useState<IProduct[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [filter, setFilter] = useState('All Items')
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -20,6 +21,7 @@ export const useShopState = () => {
             setProducts(data);
         } catch (error) {
             console.error(error);
+            setError(true)
         } finally {
             setLoading(false);
         }
@@ -55,33 +57,31 @@ export const useShopState = () => {
 
     const addItemToCart = (product: IProduct) => {
 
-        const updatedCartItems = cartItems.some(item => item.product.id === product.id)
+        const updatedCartItems = cartItems.some(item => item.id === product.id)
             ? cartItems.map(item => {
-                return item.product.id === product.id
+                return item.id === product.id
                     ? { ...item, count: item.count + 1 }
                     : item
             })
-            : [...cartItems, { product, count: 1 }]
+            : [...cartItems, { ...product, count: 1 }]
         setCartItems(updatedCartItems);
     };
 
     const increaseItemCount = (id: number) => {
         const updatedCartItems = cartItems.map(item => {
             return {
-                ...item, count: item.product.id === id ? item['count'] + 1 : item['count']
+                ...item, count: item.id === id ? item['count'] + 1 : item['count']
             }
         });
         setCartItems(updatedCartItems);
     }
 
     const decreaseItemCount = (id: number) => {
-        const updatedCartItems = cartItems
-            .filter(item => item.count !== 0)
-            .map(item => {
-                return {
-                    ...item, count: item.product.id === id ? item['count'] - 1 : item['count']
-                }
-            });
+        const updatedCartItems = cartItems.map(item => {
+            return {
+                ...item, count: item.id === id && item.count > 1 ? item['count'] - 1 : item['count']
+            }
+        });
         setCartItems(updatedCartItems);
     }
 

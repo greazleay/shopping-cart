@@ -102,6 +102,16 @@ export const theme = createTheme({
                     fontWeight: 'bold'
                 }
             }
+        },
+        MuiTab: {
+            styleOverrides: {
+                root: {
+                    color: 'white',
+                    fontFamily: 'Quicksand',
+                    fontWeight: 'bold',
+                    fontSize: '1rem'
+                }
+            }
         }
     },
     breakpoints: {

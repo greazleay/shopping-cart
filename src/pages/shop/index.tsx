@@ -20,6 +20,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useState, Fragment, SyntheticEvent } from 'react'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
+import SnackButton from '@components/SnackButton'
+import RatingCard from '@src/components/RatingCard'
+
 
 const Shop: NextPage = () => {
 
@@ -101,8 +104,9 @@ const Shop: NextPage = () => {
                             <Typography variant='body1' component={'span'} ml={1}>{product.rating.rate}</Typography>
                             <Typography variant='body1' component={'span'} ml={1}>({product.rating.count} reviews)</Typography>
                         </Box>
+                        {/* <RatingCard product={product} /> */}
                     </Box>
-                    <Button
+                    {/* <Button
                         variant='contained'
                         onClick={() => { handleClick(); addItemToCart(product) }}
                         sx={{
@@ -120,7 +124,8 @@ const Shop: NextPage = () => {
                         onClose={handleClose}
                         message='Product Added To Cart'
                         action={action}
-                    />
+                    /> */}
+                    <SnackButton product={product} addItemToCart={addItemToCart} />
                 </Paper>
             </Grid >
         )

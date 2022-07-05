@@ -13,8 +13,7 @@ export interface IProduct {
     title: string;
 }
 
-export interface ICartItem {
-    product: IProduct;
+export interface ICartItem extends IProduct {
     count: number
 }
 

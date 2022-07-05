@@ -1,4 +1,4 @@
-import type { NextPage, GetStaticPaths, GetStaticProps } from 'next';
+import type { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -13,10 +13,15 @@ import Typography from '@mui/material/Typography';
 import { useProductContext } from '@contexts/app.context';
 import { Loading } from '@components/Loading';
 import { ParsedUrlQuery } from 'querystring';
-import { IProduct } from '@interfaces/productContext.interface';
+import { ICartItem, IProduct } from '@interfaces/productContext.interface';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import IconButton from '@mui/material/IconButton';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import { useState, SyntheticEvent } from 'react';
+
+import RatingCard from '@components/RatingCard';
+import SnackButton from '@components/SnackButton';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const { data } = await axios.get('https://fakestoreapi.com/products')
@@ -39,17 +44,56 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
 }
 
+interface TabPanelProps {
+    children?: React.ReactNode;
+    index: number;
+    value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography variant='subtitle1'>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
+}
+
+function a11yProps(index: number) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
 const ProductDetail = ({ product }: { product: IProduct }) => {
 
-    // const router = useRouter();
-    // const { productId } = router.query
-    const { increaseItemCount, decreaseItemCount, cartItems } = useProductContext();
+    const { push, query } = useRouter();
+    // const { productId } = query
+    const { increaseItemCount, decreaseItemCount, cartItems, addItemToCart } = useProductContext();
 
-    const itemCount = cartItems.some(item => item.product.id === product.id) ? cartItems.find(item => item.product.id === product.id)?.count : 0
-    // const product = products.find(({ }, index) => String(index + 1) === productId as string)
-
+    const itemCount = cartItems.some(item => item.id === product?.id) ? cartItems.find(item => item.id === product?.id)?.count : 0;
+    
+    // const product = products.find(({ }, index) => String(index + 1) === productId as string) as IProduct
     // if (loading) return <Loading />
     // if (!product) return <Error statusCode={404} />
+
+    const [value, setValue] = useState(0);
+
+    const handleChange = (event: SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
 
     return (
         <Container
@@ -66,53 +110,76 @@ const ProductDetail = ({ product }: { product: IProduct }) => {
             }}
         >
             <Head>
-                <title>Shopping Cart | Product Detail</title>
+                <title>Shopping Cart | Product Details</title>
                 <meta name="description" content="shop items" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <Box sx={{ display: 'flex' }}>
-                <Box sx={{ width: '100%' }}>
+
+                <Box sx={{ width: '50%' }}>
                     <Image src={product.image} alt={product.title} width={400} height={500} />
                 </Box>
-                <Box>
-                    <Typography variant='h4'>{product.title}</Typography>
+
+                <Stack spacing={{ xs: 1, sm: 2, md: 3 }} sx={{ px: 1 }}>
+                    <Typography variant='h5'>{product.title}</Typography>
                     <Typography variant='subtitle1'>${product.price}</Typography>
 
-                    <ButtonGroup variant='contained' aria-label='outlined primary button group'>
-                        <Button>
-                            <AddCircleIcon />
-                        </Button>
-                        <Button>{itemCount}</Button>
-                        <Button>
-                            <RemoveCircleIcon />
-                        </Button>
-                    </ButtonGroup>
+                    <RatingCard product={product} />
 
-                    <Box>
-                        <Button
-                            href={`/checkout`}
-                            variant='contained'
-                            sx={{
-                                background: 'linear-gradient(90deg, hsl(176, 68%, 64%), hsl(198, 60%, 50%))',
-                                fontFamily: 'inherit',
-                                fontWeight: '600'
-                            }}
-                        >
-                            Buy Now
-                        </Button>
-                    </Box>
+                    {!itemCount && <SnackButton product={product} addItemToCart={addItemToCart} />}
 
-                </Box>
+                    {itemCount as number > 0 &&
+                        <>
+                            <ButtonGroup variant='contained' aria-label='outlined primary button group' color='secondary'>
+                                <Button onClick={() => decreaseItemCount(product.id)}>
+                                    <RemoveCircleIcon />
+                                </Button>
+                                <Button>{itemCount}</Button>
+                                <Button onClick={() => increaseItemCount(product.id)}>
+                                    <AddCircleIcon />
+                                </Button>
+                            </ButtonGroup>
+
+                            <Box>
+                                <Button
+                                    onClick={() => push(`/checkout`)}
+                                    variant='contained'
+                                    sx={{
+                                        background: 'linear-gradient(90deg, hsl(176, 68%, 64%), hsl(198, 60%, 50%))',
+                                        fontFamily: 'inherit',
+                                        fontWeight: '600'
+                                    }}
+                                >
+                                    Buy Now
+                                </Button>
+                            </Box>
+                        </>
+                    }
+                </Stack>
 
             </Box>
 
-            <Stack>
-                <Typography variant='h4' component={'h3'}>Description</Typography>
-                <Divider />
-                <Typography variant='subtitle2'>{product.description}</Typography>
-            </Stack>
-
+            <Box sx={{ width: '100%', border: 1, borderRadius: 2 }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        textColor='secondary'
+                        indicatorColor='secondary'
+                        aria-label='product description and reviews'
+                    >
+                        <Tab {...a11yProps(0)} label='Overview' />
+                        <Tab {...a11yProps(1)} label='Description' />
+                    </Tabs>
+                </Box>
+                <TabPanel value={value} index={0}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet enim quis libero varius lacinia. Vivamus quis placerat felis, id feugiat sem. Morbi nec ornare lorem, eu interdum nisl. Morbi quis justo tellus. Vestibulum placerat, ex quis cursus scelerisque, urna lectus gravida odio, eget fermentum odio felis eleifend nibh. Vestibulum aliquam metus a neque eleifend, at posuere eros scelerisque. Maecenas nulla lorem, varius ac ipsum ultrices, congue mattis elit. Mauris nec neque id risus bibendum tincidunt quis eu purus. In convallis congue turpis at feugiat. Aenean dictum eleifend mauris, in blandit ligula dapibus sed. Nulla justo nisl, interdum quis.
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    {product.description}
+                </TabPanel>
+            </Box>
 
         </Container>
     )
