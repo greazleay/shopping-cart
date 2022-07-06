@@ -46,7 +46,7 @@ const Checkout: NextPage = () => {
                     <Box>
                         <Image src={item.image} alt={item.title} width={70} height={100} />
                     </Box>
-                    <Box>
+                    <Box sx={{ p: 1 }}>
                         <Typography variant='subtitle1'>{item.title}</Typography>
                         <Typography variant='subtitle2'>Unit Price: {item.price}</Typography>
                         <RatingCard rating={item.rating} />
@@ -118,7 +118,7 @@ const Checkout: NextPage = () => {
             {cartItems.length > 0 &&
 
                 <>
-                    <Stack sx={{ width: '60%' }} spacing={2}>
+                    <Stack sx={{ width: { xs: '100%', md: '60%' }, pb: { xs: 2 } }} spacing={2}>
                         <Typography variant='h5'>
                             Cart Items ({cartItems.length})
                         </Typography>
