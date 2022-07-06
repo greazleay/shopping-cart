@@ -5,7 +5,6 @@ import Image from 'next/image';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
@@ -13,15 +12,14 @@ import Typography from '@mui/material/Typography';
 import { useProductContext } from '@contexts/app.context';
 import { Loading } from '@components/Loading';
 import { ParsedUrlQuery } from 'querystring';
-import { ICartItem, IProduct } from '@interfaces/productContext.interface';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { IProduct } from '@interfaces/productContext.interface';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useState, SyntheticEvent } from 'react';
 
 import RatingCard from '@components/RatingCard';
 import SnackButton from '@components/SnackButton';
+import CountButtons from '@components/CountButtons';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const { data } = await axios.get('https://fakestoreapi.com/products')
@@ -84,7 +82,7 @@ const ProductDetail = ({ product }: { product: IProduct }) => {
     const { increaseItemCount, decreaseItemCount, cartItems, addItemToCart } = useProductContext();
 
     const itemCount = cartItems.some(item => item.id === product?.id) ? cartItems.find(item => item.id === product?.id)?.count : 0;
-    
+
     // const product = products.find(({ }, index) => String(index + 1) === productId as string) as IProduct
     // if (loading) return <Loading />
     // if (!product) return <Error statusCode={404} />
@@ -125,21 +123,18 @@ const ProductDetail = ({ product }: { product: IProduct }) => {
                     <Typography variant='h5'>{product.title}</Typography>
                     <Typography variant='subtitle1'>${product.price}</Typography>
 
-                    <RatingCard product={product} />
+                    <RatingCard rating={product.rating} />
 
                     {!itemCount && <SnackButton product={product} addItemToCart={addItemToCart} />}
 
                     {itemCount as number > 0 &&
                         <>
-                            <ButtonGroup variant='contained' aria-label='outlined primary button group' color='secondary'>
-                                <Button onClick={() => decreaseItemCount(product.id)}>
-                                    <RemoveCircleIcon />
-                                </Button>
-                                <Button>{itemCount}</Button>
-                                <Button onClick={() => increaseItemCount(product.id)}>
-                                    <AddCircleIcon />
-                                </Button>
-                            </ButtonGroup>
+                            <CountButtons
+                                itemCount={itemCount as number}
+                                productId={product.id}
+                                decreaseItemCount={decreaseItemCount}
+                                increaseItemCount={increaseItemCount}
+                            />
 
                             <Box>
                                 <Button

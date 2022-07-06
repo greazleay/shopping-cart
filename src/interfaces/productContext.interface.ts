@@ -29,9 +29,9 @@ export interface IProductContext {
     openMenu: boolean;
     anchorEl: null | HTMLElement;
     handleClose: () => void;
-    handleMouseOver: () => void;
+    handleMouseOver: (e: MouseEvent<HTMLElement>) => void;
     handlePaginate: (e: ChangeEvent<unknown>, page: number) => void;
-    handleFilter: (e: MouseEvent<HTMLLIElement | HTMLDivElement>) => void;
+    handleFilter: (e: MouseEvent<HTMLLIElement | HTMLDivElement> | any) => void;
     addItemToCart: (product: IProduct) => void
     increaseItemCount: (id: number) => void
     decreaseItemCount: (id: number) => void

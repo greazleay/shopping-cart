@@ -49,7 +49,7 @@ export const useShopState = () => {
         setCurrentPage(page);
     };
 
-    const handleFilter = (e: ChangeEvent<HTMLAnchorElement>) => {
+    const handleFilter = (e: any) => {
         const { textContent } = e.target;
         setFilter(textContent as string);
         setAnchorEl(null);

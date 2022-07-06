@@ -3,22 +3,14 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/image'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Pagination from '@mui/material/Pagination'
 import Paper from '@mui/material/Paper'
-import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography'
 import { useProductContext } from '@contexts/app.context'
 import { Loading } from '@components/Loading'
 import { Sidebar } from '@components/Sidebar'
-
-import Snackbar from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import { useState, Fragment, SyntheticEvent } from 'react'
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import SnackButton from '@components/SnackButton'
 import RatingCard from '@src/components/RatingCard'
@@ -29,32 +21,6 @@ const Shop: NextPage = () => {
     const { push } = useRouter()
 
     const { filteredProducts, loading, itemsPerPage, offset, pageCount, currentPage, handlePaginate, addItemToCart } = useProductContext();
-    const [openSnackBar, setOpenSnackbar] = useState(false);
-
-    const handleClick = () => {
-        setOpenSnackbar(true);
-    };
-
-    const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') return;
-        setOpenSnackbar(false);
-    };
-
-    const action = (
-        <Fragment>
-            <Button color='secondary' size='small' onClick={handleClose}>
-                UNDO
-            </Button>
-            <IconButton
-                size='small'
-                aria-label='close'
-                color='inherit'
-                onClick={handleClose}
-            >
-                <CloseIcon fontSize='small' />
-            </IconButton>
-        </Fragment>
-    );
 
     const productsList = filteredProducts.slice(offset, offset + itemsPerPage).map(product => {
         return (
@@ -98,33 +64,8 @@ const Shop: NextPage = () => {
                                 ${product.price}
                             </Typography>
                         </Box>
-
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <Rating name='read-only' value={product.rating.rate} precision={0.1} readOnly size='small' />
-                            <Typography variant='body1' component={'span'} ml={1}>{product.rating.rate}</Typography>
-                            <Typography variant='body1' component={'span'} ml={1}>({product.rating.count} reviews)</Typography>
-                        </Box>
-                        {/* <RatingCard product={product} /> */}
+                        <RatingCard rating={product.rating} />
                     </Box>
-                    {/* <Button
-                        variant='contained'
-                        onClick={() => { handleClick(); addItemToCart(product) }}
-                        sx={{
-                            background: 'linear-gradient(90deg, hsl(176, 68%, 64%), hsl(198, 60%, 50%))',
-                            fontFamily: 'inherit',
-                            fontWeight: '600'
-                        }}
-                        endIcon={<ShoppingCartOutlinedIcon />}
-                    >
-                        Add To Cart
-                    </Button>
-                    <Snackbar
-                        open={openSnackBar}
-                        autoHideDuration={6000}
-                        onClose={handleClose}
-                        message='Product Added To Cart'
-                        action={action}
-                    /> */}
                     <SnackButton product={product} addItemToCart={addItemToCart} />
                 </Paper>
             </Grid >
