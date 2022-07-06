@@ -67,6 +67,11 @@ export const useShopState = () => {
         setCartItems(updatedCartItems);
     };
 
+    const removeItemFromCart = (itemId: number): void => {
+        const updatedCartItems = cartItems.filter(item => item.id !== itemId);
+        setCartItems(updatedCartItems)
+    }
+
     const increaseItemCount = (id: number) => {
         const updatedCartItems = cartItems.map(item => {
             return {
@@ -101,6 +106,7 @@ export const useShopState = () => {
         handlePaginate,
         handleFilter,
         addItemToCart,
+        removeItemFromCart,
         increaseItemCount,
         decreaseItemCount
     };

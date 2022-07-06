@@ -79,7 +79,8 @@ const Shop: NextPage = () => {
             sx={{
                 display: 'flex',
                 justifyContent: 'space-around',
-                alignItems: 'center  ',
+                alignItems: 'start',
+                pt: { xs: 1, sm: 10, md: 15 },
                 minHeight: '100vh',
                 flexWrap: 'wrap',
                 width: '100%'
@@ -99,7 +100,7 @@ const Shop: NextPage = () => {
                     <Sidebar />
 
                     <Box width={'70%'} sx={{ display: 'flex', flexFlow: 'column wrap', justifyContent: 'space-around', alignItems: 'center' }}>
-                        <Grid container spacing={3} sx={{ py: 10 }}>
+                        <Grid container spacing={3} sx={{ pb: 10 }}>
                             {productsList}
                         </Grid>
                         <Pagination
